@@ -1,0 +1,28 @@
+#!/bin/bash
+#SBATCH --partition=general # This can run up to 12 hours
+###SBATCH --partition=lo-core # This can be as long as 7 days but longer queue
+###SBATCH --partition=debug
+###SBATCH --partition=priority # This can run infinite time, uncomment this line and two lines following this. 
+###SBATCH --account=chl23026
+###SBATCH --qos=chl23026
+###SBATCH --constraint=epyc128 # This is optional
+#SBATCH --nodes=1
+#SBATCH --ntasks=64
+#SBATCH --time=00:10:00
+#SBATCH --job-name=ibamr
+#SBATCH --output=ibamr_output_%j
+#SBATCH --no-requeue
+
+##the slurm number to restart simulation... This need full state to be stored.
+SUBMITDIR=$SLURM_SUBMIT_DIR
+WORKDIR=/scratch/chl23026/chl23026/ibamr_$SLURM_JOB_ID #modify the second chl23026 to your NetID
+CODEDIR=$PWD/examples/IB/explicit/ex0/. # for a different example, modify this path
+mkdir -p "$WORKDIR" && cp -a "$CODEDIR" "$WORKDIR" && cd "$WORKDIR" || exit -1
+
+##For IVP simulation
+mpiexec -n $SLURM_NTASKS ./main2d input2d 
+
+
+cd "$SUBMITDIR" && cp ibamr_output_$SLURM_JOB_ID "$WORKDIR"
+
+
