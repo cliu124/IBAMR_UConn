@@ -4,6 +4,17 @@ module load boost/1.77.0 # load boost
 
 module load hdf5/1.21.1 # load hdf5
 
+#Install boost
+cd $HOME/sfw/linux
+mkdir boost
+cd boost
+wget 
+tar xvfz path/to/boost_1_66_0.tar.gz
+mv boost_1_66_0 1.66.0
+export BOOST_ROOT=$HOME/$FOLDER_NAME/linux/boost/1.66.0
+mkdir $BOOST_ROOT/include
+ln -s $BOOST_ROOT/boost $BOOST_ROOT/include
+
 #Install silo
 cd $HOME/$FOLDER_NAME
 mkdir linux
