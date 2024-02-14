@@ -4,6 +4,7 @@ mkdir $HOME/$FOLDER_NAME
 module load mpich/4.0.2
 
 #Install boost
+mkdir $HOME/$FOLDER_NAME/linux
 cd $HOME/$FOLDER_NAME/linux
 mkdir boost
 cd boost
