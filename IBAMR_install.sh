@@ -1,8 +1,11 @@
+#The first three lines needs to be retpyed in the command line if re-login to HPC
 export FOLDER_NAME=sfw_test ###define the name the folder
-mkdir $HOME/$FOLDER_NAME
-
+module unload gcc
 module load mpich/4.0.2
 
+mkdir $HOME/$FOLDER_NAME
+
+#------------
 #Install boost
 mkdir $HOME/$FOLDER_NAME/linux
 cd $HOME/$FOLDER_NAME/linux
@@ -15,12 +18,13 @@ export BOOST_ROOT=$HOME/$FOLDER_NAME/linux/boost/1.66.0
 mkdir $BOOST_ROOT/include
 ln -s $BOOST_ROOT/boost $BOOST_ROOT/include
 
+#--------------
 #Install hdf5
 cd $HOME/$FOLDER_NAME/linux
 mkdir hdf5
 cd hdf5
 cp $HOME/IBAMR_UConn/hdf5-1.10.6.tar.bz2 $HOME/$FOLDER_NAME/linux/hdf5
-tar xvjf path/to/hdf5-1.10.6.gz.bz2
+tar xvjf hdf5-1.10.6.tar.bz2
 cd hdf5-1.10.6
 ./configure \
   CC=gcc \
@@ -29,13 +33,13 @@ cd hdf5-1.10.6
   F77=gfortran \
   --enable-build-mode=production \
   --prefix=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6
-make -j4
-make -j4 check
-make -j4 install
+make -j16
+make -j16 check
+make -j16 install
 
+#-------------
 #Install silo
 cd $HOME/$FOLDER_NAME
-mkdir linux
 cd linux
 cp $HOME/IBAMR_UConn/silo-4.11-bsd.tar.gz $HOME/$FOLDER_NAME/linux
 tar xvfz silo-4.11-bsd.tar.gz
@@ -49,11 +53,12 @@ cd silo-4.11-bsd
  --enable-shared=yes \
  --enable-browser=no \
  --with-hdf5=no \
- --with-sz=no \ 
+ --with-sz=no \
  --prefix=$HOME/$FOLDER_NAME/linux/silo/4.11 
-make -j4
-make -j4 install
+make -j16
+make -j16 install
 
+#---------------
 #Intall PETSc
 cd $HOME/$FOLDER_NAME
 mkdir petsc
@@ -62,6 +67,7 @@ wget http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-3.17.5.tar.gz
 tar xvfz petsc-3.17.5.tar.gz
 mv petsc-3.17.5 3.17.5
 cd 3.17.5
+
 
 #Build PETSc debug version
 export PETSC_DIR=$PWD
@@ -72,9 +78,10 @@ export PETSC_ARCH=linux-debug
   --FC=mpif90 \
   --with-debugging=1 \
   --download-hypre=1 \
-  --with-x=0
-make -j4
-make -j4 test
+  --with-x=0 \
+  --download-fblaslapack=1
+make -j16
+make -j16 test
 
 #Build PETSc optimized version
 export PETSC_DIR=$PWD
@@ -89,11 +96,12 @@ export PETSC_ARCH=linux-opt
   --PETSC_ARCH=$PETSC_ARCH \
   --with-debugging=0 \
   --download-hypre=1 \
-  --with-x=0
-make -j4
-make -j4 test
+  --with-x=0 \
+  --download-fblaslapack=1 # Need to add this line
+make -j16
+make -j16 test
 
-
+#---------------------
 # Install samrai
 cd $HOME/$FOLDER_NAME
 mkdir samrai
@@ -137,8 +145,8 @@ cd objs-debug
   --disable-opt \
   --enable-implicit-template-instantiation \
   --disable-deprecated
-make -j4
-make -j4 install
+make -j16
+make -j16 install
 
 #install optimized build of SAMRAI
 cd $HOME/$FOLDER_NAME/samrai/2.4.4
@@ -169,9 +177,10 @@ cd objs-opt
   --enable-opt \
   --enable-implicit-template-instantiation \
   --disable-deprecated
-make -j4
-make -j4 install
+make -j16
+make -j16 install
 
+#------------------
 #Install libMesh to be finished
 cd $HOME/$FOLDER_NAME/linux
 mkdir libmesh
@@ -212,8 +221,8 @@ cd objs-debug
     --disable-glibcxx-debugging \
     --disable-vtk \
     --with-thread-model=none
-make -j4
-make -j4 install
+make -j16
+make -j16 install
 
 #Build optimized libmesh
 cd $HOME/$FOLDER_NAME/linux/libmesh/1.6.2
@@ -245,10 +254,10 @@ cd objs-opt
     --disable-glibcxx-debugging \
     --disable-vtk \
     --with-thread-model=none
-make -j4
-make -j4 install
+make -j16
+make -j16 install
 
-
+#-----------------
 #Install IBAMR
 cd $HOME/$FOLDER_NAME
 mkdir ibamr
@@ -279,7 +288,7 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   --enable-libmesh \
   --with-libmesh=$HOME/$FOLDER_NAME/linux/libmesh/1.6.2/1.6.2-debug \
   --with-libmesh-method=dbg
-make -j4
+make -j16
 
 #Build IBAMR optimzied version
 cd $HOME/$FOLDER_NAME/ibamr
@@ -306,4 +315,9 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   --enable-libmesh \
   --with-libmesh=$HOME/$FOLDER_NAME/linux/libmesh/1.6.2/1.6.2-opt \
   --with-libmesh-method=opt
-make -j4
+make -j16
+
+#copy the submission file to corresponding folders. 
+cp $HOME/IBAMR_UConn/submit_ibamr_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-debug
+
+cp $HOME/IBAMR_UConn/submit_ibamr_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-opts
