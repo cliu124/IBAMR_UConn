@@ -1,5 +1,5 @@
 #The first three lines needs to be retpyed in the command line if re-login to HPC
-export FOLDER_NAME=sfw_test ###define the name the folder
+export FOLDER_NAME=sfw ###define the name the folder
 module unload gcc
 module load mpich/4.0.2
 
