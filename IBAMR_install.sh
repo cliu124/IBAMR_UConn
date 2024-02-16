@@ -289,6 +289,7 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   --with-libmesh=$HOME/$FOLDER_NAME/linux/libmesh/1.6.2/1.6.2-debug \
   --with-libmesh-method=dbg
 make -j16
+make examples
 
 #Build IBAMR optimzied version
 cd $HOME/$FOLDER_NAME/ibamr
@@ -316,8 +317,9 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   --with-libmesh=$HOME/$FOLDER_NAME/linux/libmesh/1.6.2/1.6.2-opt \
   --with-libmesh-method=opt
 make -j16
+make examples
 
 #copy the submission file to corresponding folders. 
-cp $HOME/IBAMR_UConn/submit_ibamr_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-debug
+cp $HOME/IBAMR_UConn/submit_IBAMR_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-debug
 
-cp $HOME/IBAMR_UConn/submit_ibamr_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-opts
+cp $HOME/IBAMR_UConn/submit_IBAMR_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-opts
