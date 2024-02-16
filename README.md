@@ -12,8 +12,10 @@ sh IBAMR_install.sh
 
 #Then go to the corresonding folder
 
-cd $HOME/
+cd $HOME/$FOLDER_NAME/ibamr/ibamr-objs-opt
 
-#This will submit the running job to computing node
+#Then modify the CODEDIR into the specific example you want to run
+
+#Then the command below will submit the running job to computing node
 
 sbatch submit_IBAMR_uconn 
