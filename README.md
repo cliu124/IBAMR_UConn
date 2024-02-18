@@ -10,7 +10,7 @@ cd IBAMR_UConn
 
 sh IBAMR_install.sh
 
-#Then go to the corresonding folder
+#Then go to the corresponding folder
 
 cd $HOME/$FOLDER_NAME/ibamr/ibamr-objs-opt
 

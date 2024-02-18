@@ -322,4 +322,4 @@ make examples
 #copy the submission file to corresponding folders. 
 cp $HOME/IBAMR_UConn/submit_IBAMR_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-debug
 
-cp $HOME/IBAMR_UConn/submit_IBAMR_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-opts
+cp $HOME/IBAMR_UConn/submit_IBAMR_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-opt
