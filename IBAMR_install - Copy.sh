@@ -1,8 +1,8 @@
 #The first three lines needs to be retpyed in the command line if re-login to HPC
-export FOLDER_NAME=test1 ###define the name the folder
+export FOLDER_NAME=sfw ###define the name the folder
 module unload gcc
 module load mpich/4.0.2
-module load hdf5/1.14.4-2
+
 mkdir $HOME/$FOLDER_NAME
 
 #------------
@@ -19,23 +19,23 @@ mkdir $BOOST_ROOT/include
 ln -s $BOOST_ROOT/boost $BOOST_ROOT/include
 
 #--------------
-### Install hdf5
-# cd $HOME/$FOLDER_NAME/linux
-# mkdir hdf5
-# cd hdf5
-# cp $HOME/IBAMR_UConn/hdf5-1.10.6.tar.bz2 $HOME/$FOLDER_NAME/linux/hdf5
-# tar xvjf hdf5-1.10.6.tar.bz2
-# cd hdf5-1.10.6
-# ./configure \
-#  CC=gcc \
-#  CXX=g++ \
-#  FC=gfortran \
-#  F77=gfortran \
-#  --enable-build-mode=production \
-#  --prefix=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6
-# make -j16
-# make -j16 check
-# make -j16 install
+#Install hdf5
+cd $HOME/$FOLDER_NAME/linux
+mkdir hdf5
+cd hdf5
+cp $HOME/IBAMR_UConn/hdf5-1.10.6.tar.bz2 $HOME/$FOLDER_NAME/linux/hdf5
+tar xvjf hdf5-1.10.6.tar.bz2
+cd hdf5-1.10.6
+./configure \
+  CC=gcc \
+  CXX=g++ \
+  FC=gfortran \
+  F77=gfortran \
+  --enable-build-mode=production \
+  --prefix=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6
+make -j16
+make -j16 check
+make -j16 install
 
 #-------------
 #Install silo
@@ -128,8 +128,7 @@ cd objs-debug
   --with-CC=mpicc \
   --with-CXX=mpicxx \
   --with-F77=mpif90 \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
-  --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
+  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --without-petsc \
   --without-hypre \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
@@ -162,8 +161,7 @@ cd objs-opt
   --with-CC=mpicc \
   --with-CXX=mpicxx \
   --with-F77=mpif90 \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
-  --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
+  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --without-hypre \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
   --without-blaslapack \
@@ -284,8 +282,7 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   CPPFLAGS="-DOMPI_SKIP_MPICXX" \
   --with-hypre=$PETSC_DIR/$PETSC_ARCH \
   --with-samrai=$HOME/$FOLDER_NAME/samrai/2.4.4/linux-g++-debug \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
-  --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
+  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
   --with-boost=$HOME/$FOLDER_NAME/linux/boost/1.66.0 \
   --enable-libmesh \
@@ -313,8 +310,7 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   CPPFLAGS="-DOMPI_SKIP_MPICXX" \
   --with-hypre=$PETSC_DIR/$PETSC_ARCH \
   --with-samrai=$HOME/$FOLDER_NAME/samrai/2.4.4/linux-g++-opt \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
-  --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
+  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
   --with-boost=$HOME/$FOLDER_NAME/linux/boost/1.66.0 \
   --enable-libmesh \
