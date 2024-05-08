@@ -1,8 +1,8 @@
 #The first three lines needs to be retpyed in the command line if re-login to HPC
-export FOLDER_NAME=test1 ###define the name the folder
-module unload gcc
-module load mpich/4.0.2
-module load hdf5/1.14.4-2
+export FOLDER_NAME=test2 ###define the name the folder
+module unload gcc 
+module load mpich/4.0.2 
+module load hdf5/1.14.4-2 
 mkdir $HOME/$FOLDER_NAME
 
 #------------
@@ -128,7 +128,6 @@ cd objs-debug
   --with-CC=mpicc \
   --with-CXX=mpicxx \
   --with-F77=mpif90 \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
   --without-petsc \
   --without-hypre \
@@ -149,6 +148,9 @@ cd objs-debug
 make -j16
 make -j16 install
 
+#--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
+
+
 #install optimized build of SAMRAI
 cd $HOME/$FOLDER_NAME/samrai/2.4.4
 mkdir objs-opt
@@ -162,7 +164,6 @@ cd objs-opt
   --with-CC=mpicc \
   --with-CXX=mpicxx \
   --with-F77=mpif90 \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
   --without-hypre \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
@@ -181,6 +182,9 @@ cd objs-opt
   --disable-deprecated
 make -j16
 make -j16 install
+
+#--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
+
 
 #------------------
 #Install libMesh to be finished
@@ -284,7 +288,6 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   CPPFLAGS="-DOMPI_SKIP_MPICXX" \
   --with-hypre=$PETSC_DIR/$PETSC_ARCH \
   --with-samrai=$HOME/$FOLDER_NAME/samrai/2.4.4/linux-g++-debug \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
   --with-boost=$HOME/$FOLDER_NAME/linux/boost/1.66.0 \
@@ -293,6 +296,10 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   --with-libmesh-method=dbg
 make -j16
 make examples
+
+
+
+###--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
 
 #Build IBAMR optimzied version
 cd $HOME/$FOLDER_NAME/ibamr
@@ -313,7 +320,6 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   CPPFLAGS="-DOMPI_SKIP_MPICXX" \
   --with-hypre=$PETSC_DIR/$PETSC_ARCH \
   --with-samrai=$HOME/$FOLDER_NAME/samrai/2.4.4/linux-g++-opt \
-  #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
   --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
   --with-boost=$HOME/$FOLDER_NAME/linux/boost/1.66.0 \
@@ -322,6 +328,8 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   --with-libmesh-method=opt
 make -j16
 make examples
+
+#--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
 
 #copy the submission file to corresponding folders. 
 cp $HOME/IBAMR_UConn/submit_IBAMR_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-debug
