@@ -23,7 +23,7 @@ ln -s $BOOST_ROOT/boost $BOOST_ROOT/include
 cd $HOME/$FOLDER_NAME/linux
 mkdir hdf5
 cd hdf5
-cp $HOME/IBAMR_UConn/hdf5-1.14.4-2.tar.bz2 $HOME/$FOLDER_NAME/linux/hdf5
+cp $HOME/IBAMR_UConn/hdf5-1.14.4-2.tar.gz $HOME/$FOLDER_NAME/linux/hdf5
 tar xvfz hdf5-1.14.4-2.tar.gz
 cd hdf5-1.14.4-2
 ./configure \
@@ -32,7 +32,7 @@ cd hdf5-1.14.4-2
  FC=gfortran \
  F77=gfortran \
  --enable-build-mode=production \
- --prefix=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6
+ --prefix=$HOME/$FOLDER_NAME/linux/hdf5/1.14.4-2
 make -j16
 make -j16 check
 make -j16 install
