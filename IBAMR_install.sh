@@ -323,7 +323,7 @@ export PETSC_DIR=$HOME/$FOLDER_NAME/petsc/3.17.5
   CPPFLAGS="-DOMPI_SKIP_MPICXX" \
   --with-hypre=$PETSC_DIR/$PETSC_ARCH \
   --with-samrai=$HOME/$FOLDER_NAME/samrai/2.4.4/linux-g++-opt \
-  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
+  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.14.4-2 \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
   --with-boost=$HOME/$FOLDER_NAME/linux/boost/1.66.0 \
   --enable-libmesh \
