@@ -1,8 +1,8 @@
 #The first three lines needs to be retpyed in the command line if re-login to HPC
-export FOLDER_NAME=test2 ###define the name the folder
+export FOLDER_NAME=test3 ###define the name the folder
 module unload gcc 
 module load mpich/4.0.2 
-module load hdf5/1.14.4-2 
+###module load hdf5/1.14.4-2 
 mkdir $HOME/$FOLDER_NAME
 
 #------------
@@ -131,7 +131,7 @@ cd objs-debug
   --with-CC=mpicc \
   --with-CXX=mpicxx \
   --with-F77=mpif90 \
-  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.14.4-2 
+  --with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.14.4-2 \
   --without-petsc \
   --without-hypre \
   --with-silo=$HOME/$FOLDER_NAME/linux/silo/4.11 \
@@ -153,8 +153,6 @@ make -j16 install
 
 #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
 #  --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
-
-
 
 #install optimized build of SAMRAI
 cd $HOME/$FOLDER_NAME/samrai/2.4.4
@@ -306,8 +304,6 @@ make examples
 
 ###  --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
 
-
-
 #Build IBAMR optimzied version
 cd $HOME/$FOLDER_NAME/ibamr
 mkdir ibamr-objs-opt
@@ -338,7 +334,6 @@ make examples
 
 #--with-hdf5=$HOME/$FOLDER_NAME/linux/hdf5/1.10.6 \
 #  --with-hdf5=/gpfs/sharedfs1/admin/hpc2.0/apps/hdf5/1.14.4-2 \
-
 
 #copy the submission file to corresponding folders. 
 cp $HOME/IBAMR_UConn/submit_IBAMR_uconn $HOME/$FOLDER_NAME/ibamr/ibamr-objs-debug
